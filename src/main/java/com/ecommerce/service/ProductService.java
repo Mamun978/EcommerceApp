@@ -66,7 +66,7 @@ public class ProductService {
 
     public void updateProduct(Integer productId, ProductDto productDto) throws Exception {
 
-        Optional<Product> OptionalProduct= productRepository.findById(productId);
+        Optional<Product> OptionalProduct=productRepository.findById(productId);
 
         if(!OptionalProduct.isPresent()){
             throw new Exception("Product id does not exist");

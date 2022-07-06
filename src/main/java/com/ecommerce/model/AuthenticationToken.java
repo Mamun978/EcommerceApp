@@ -62,6 +62,9 @@ public void setUser(User user) {
     this.user = user;
 }
 
+public AuthenticationToken() {
+}
+
 public AuthenticationToken(User user){
     this.user=user;
     this.createDate=new Date();

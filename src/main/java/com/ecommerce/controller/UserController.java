@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.dto.ResponseDto;
+import com.ecommerce.dto.user.SignInDto;
+import com.ecommerce.dto.user.SignInResponseDto;
 import com.ecommerce.dto.user.SignupDto;
 import com.ecommerce.service.UserService;
 
@@ -25,5 +27,11 @@ public class UserController {
 
         //hash the password
         //create the token
+    }
+
+    @PostMapping("/signin")
+    public SignInResponseDto signIn(@RequestBody SignInDto signInDto){
+        return this.userService.signin(signInDto);
+        
     }
 }

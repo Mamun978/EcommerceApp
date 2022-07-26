@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ecommerce.dto.ProductDto;
+import com.ecommerce.exceptions.ProductNotExistsException;
 import com.ecommerce.model.Category;
 import com.ecommerce.model.Product;
 import com.ecommerce.repository.ProductRepository;
@@ -83,5 +84,13 @@ public class ProductService {
         this.productRepository.save(product);
 
     }
-    
+
+    public Product findById(Integer productId) throws ProductNotExistsException {
+
+        Optional<Product> optionalProduct=productRepository.findById(productId);
+        if(optionalProduct.isEmpty()){
+            throw  new ProductNotExistsException("Product id is invalid "+productId);
+        }
+        return  optionalProduct.get();
+    }
 }

@@ -30,7 +30,7 @@ public class WishList {
 
     @ManyToOne
     @JoinColumn(name="product_id")
-    private Product product;
+    private Product product; //one product can be part of many wishlist
 
     public WishList(Integer id, User user, Date createdDate, Product product) {
         this.id = id;

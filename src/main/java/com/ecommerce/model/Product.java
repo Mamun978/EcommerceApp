@@ -28,7 +28,7 @@ public class Product {
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name="category_id")
-    Category category;
+    Category category;//many product can be part of one category
 
     public Product(){
         

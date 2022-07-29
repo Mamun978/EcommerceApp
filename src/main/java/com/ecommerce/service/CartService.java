@@ -3,6 +3,7 @@ package com.ecommerce.service;
 import com.ecommerce.dto.Cart.AddToCartDto;
 import com.ecommerce.dto.Cart.CartDto;
 import com.ecommerce.dto.Cart.CartItemDto;
+import com.ecommerce.exceptions.CustomException;
 import com.ecommerce.model.Cart;
 import com.ecommerce.model.Product;
 import com.ecommerce.model.User;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartService {
@@ -62,5 +64,22 @@ public class CartService {
         cartDto.setCartItem(cartItem);
 
         return  cartDto;
+    }
+
+    public void deleteCart(Integer cartItemId, User user) {
+
+        Optional<Cart>optionalCart= cartRepository.findById(cartItemId);
+
+        if(optionalCart.isEmpty()){
+            throw  new CustomException("cart is empty");
+        }
+
+        Cart cart=optionalCart.get();
+
+        if(cart.getUser()!=user){
+            throw  new CustomException("Cart related to the user is not found");
+        }
+
+        this.cartRepository.delete(cart);;
     }
 }

@@ -62,4 +62,20 @@ public class CartController {
 
     // delete a cart for a user
 
+
+    @DeleteMapping("/delete/{cartItemId}")
+    public ResponseEntity<ApiResponse> deleteCartItem(@PathVariable("cartItemId")Integer cartItemId,
+                                                      @RequestParam("token")String token){
+
+        //authenticate the token
+        authenticationService.authenticate(token);
+
+        //find the user
+
+        User user=authenticationService.getUser(token);
+
+        cartService.deleteCart(cartItemId,user);
+
+        return  new ResponseEntity<>(new ApiResponse(true,"Cart Item deleted"), HttpStatus.OK);
+    }
 }
